@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://opencode.ai",
+  "homepage": "https://github.com/poltter-group/poltter",
   "author": {
     "name": "Poltter",
-    "email": "hello@opencode.ai"
+    "email": "poltter-group@users.noreply.github.com"
   },
   "scripts": {
     "typecheck": "tsgo -b",
