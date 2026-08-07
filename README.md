@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://opencode.ai">
+  <a href="https://github.com/poltter-group/poltter">
     <picture>
       <source srcset="packages/console/app/src/asset/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset="packages/console/app/src/asset/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
@@ -9,9 +9,8 @@
 </p>
 <p align="center">The open source AI coding agent.</p>
 <p align="center">
-  <a href="https://opencode.ai/discord"><img alt="Discord" src="https://img.shields.io/discord/1391832426048651334?style=flat-square&label=discord" /></a>
+  <a href="https://github.com/poltter-group/poltter"><img alt="GitHub" src="https://img.shields.io/github/stars/poltter-group/poltter?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/poltter-ai"><img alt="npm" src="https://img.shields.io/npm/v/poltter-ai?style=flat-square" /></a>
-  <a href="https://github.com/anomalyco/opencode/actions/workflows/publish.yml"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/anomalyco/opencode/publish.yml?style=flat-square&branch=dev" /></a>
 </p>
 
 <p align="center">
@@ -39,26 +38,21 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![Poltter Terminal UI](packages/web/src/assets/lander/screenshot.png)](https://opencode.ai)
+[![Poltter Terminal UI](packages/web/src/assets/lander/screenshot.png)](https://github.com/poltter-group/poltter)
 
 ---
 
 ### Installation
 
 ```bash
-# YOLO
-curl -fsSL https://opencode.ai/install | bash
+# Install from source
+git clone https://github.com/poltter-group/poltter.git
+cd poltter
+bun install
+bun run build
 
 # Package managers
 npm i -g poltter-ai@latest        # or bun/pnpm/yarn
-scoop install poltter             # Windows
-choco install poltter             # Windows
-brew install anomalyco/tap/poltter # macOS and Linux (recommended, always up to date)
-brew install poltter              # macOS and Linux (official brew formula, updated less)
-sudo pacman -S poltter            # Arch Linux (Stable)
-paru -S poltter-bin               # Arch Linux (Latest from AUR)
-mise use -g poltter               # Any OS
-nix run nixpkgs#poltter           # or github:anomalyco/opencode for latest dev branch
 ```
 
 > [!TIP]
@@ -66,7 +60,7 @@ nix run nixpkgs#poltter           # or github:anomalyco/opencode for latest dev 
 
 ### Desktop App (BETA)
 
-Poltter is also available as a desktop application. Download directly from the [releases page](https://github.com/anomalyco/opencode/releases) or [opencode.ai/download](https://opencode.ai/download).
+Poltter is also available as a desktop application. Download directly from the [releases page](https://github.com/poltter-group/poltter/releases).
 
 | Platform              | Download                           |
 | --------------------- | ---------------------------------- |
@@ -93,8 +87,8 @@ The install script respects the following priority order for the installation pa
 
 ```bash
 # Examples
-POLTTER_INSTALL_DIR=/usr/local/bin curl -fsSL https://opencode.ai/install | bash
-XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
+POLTTER_INSTALL_DIR=/usr/local/bin
+XDG_BIN_DIR=$HOME/.local/bin
 ```
 
 ### Agents
@@ -110,11 +104,9 @@ Poltter includes two built-in agents you can switch between with the `Tab` key.
 Also included is a **general** subagent for complex searches and multistep tasks.
 This is used internally and can be invoked using `@general` in messages.
 
-Learn more about [agents](https://opencode.ai/docs/agents).
-
 ### Documentation
 
-For more info on how to configure Poltter, [**head over to our docs**](https://opencode.ai/docs).
+For more info on how to configure Poltter, check the docs in the `docs/` directory.
 
 ### Contributing
 
@@ -126,4 +118,4 @@ If you are working on a project that's related to Poltter and is using "poltter"
 
 ---
 
-**Join our community** [Discord](https://discord.gg/poltter) | [X.com](https://x.com/poltter)
+**Join our community** [GitHub](https://github.com/poltter-group/poltter)
