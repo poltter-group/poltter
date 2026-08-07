@@ -1,0 +1,33 @@
+{
+  "$schema": "https://v2-8-13.turborepo.dev/schema.json",
+  "globalEnv": ["CI", "POLTTER_DISABLE_SHARE"],
+  "globalPassThroughEnv": ["CI", "POLTTER_DISABLE_SHARE"],
+  "tasks": {
+    "typecheck": {},
+    "build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "poltter#test": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "passThroughEnv": ["*"]
+    },
+    "@poltter-ai/core#test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "@poltter-ai/app#test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "@poltter-ai/ui#test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "@poltter-ai/session-ui#test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    }
+  }
+}

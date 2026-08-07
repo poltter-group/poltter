@@ -1,0 +1,616 @@
+---
+title: CLI
+description: Poltter CLI Optionen und Befehle.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components"
+
+Der Poltter CLI startet standardmäßig das [TUI](/docs/tui), wenn er ohne Argumente ausgeführt wird.
+
+```bash
+poltter
+```
+
+Es akzeptiert aber auch Befehle, wie auf dieser Seite dokumentiert. Dadurch können Sie programmgesteuert mit Poltter interagieren.
+
+```bash
+poltter run "Explain how closures work in JavaScript"
+```
+
+---
+
+### tui
+
+Starten Sie die Terminalbenutzeroberfläche Poltter.
+
+```bash
+poltter [project]
+```
+
+#### Optionen
+
+| Flag                                     | Kurz | Beschreibung                                                           |
+| ---------------------------------------- | ---- | ---------------------------------------------------------------------- |
+| <nobr><code>{"--continue"}</code></nobr> | `-c` | Setzen Sie die letzte Sitzung fort                                     |
+| <nobr><code>{"--session"}</code></nobr>  | `-s` | Session-ID zum Fortfahren                                              |
+| <nobr><code>{"--fork"}</code></nobr>     |      | Sitzung beim Fortsetzen verzweigen (mit `--continue` oder `--session`) |
+| <nobr><code>{"--prompt"}</code></nobr>   |      | Prompt zur Verwendung                                                  |
+| <nobr><code>{"--model"}</code></nobr>    | `-m` | Zu verwendendes Modell in der Form provider/model                      |
+| <nobr><code>{"--agent"}</code></nobr>    |      | Zu verwendender Agent                                                  |
+| <nobr><code>{"--port"}</code></nobr>     |      | Port zum Abhören                                                       |
+| <nobr><code>{"--hostname"}</code></nobr> |      | Hostname zum Abhören                                                   |
+
+---
+
+## Befehle
+
+Der Poltter CLI verfügt außerdem über die folgenden Befehle.
+
+---
+
+### agent
+
+Agenten für Poltter verwalten.
+
+```bash
+poltter agent [command]
+```
+
+---
+
+### attach
+
+Schließen Sie ein Terminal an einen bereits laufenden Poltter-Backend-Server an, der über die Befehle `serve` oder `web` gestartet wurde.
+
+```bash
+poltter attach [url]
+```
+
+Dies ermöglicht die Verwendung von TUI mit einem Remote-Backend Poltter. Zum Beispiel:
+
+```bash
+# Start the backend server for web/mobile access
+poltter web --port 4096 --hostname 0.0.0.0
+
+# In another terminal, attach the TUI to the running backend
+poltter attach http://10.20.30.40:4096
+```
+
+#### Optionen
+
+| Flag                                     | Kurz | Beschreibung                                                                       |
+| ---------------------------------------- | ---- | ---------------------------------------------------------------------------------- |
+| <nobr><code>{"--dir"}</code></nobr>      |      | Arbeitsverzeichnis zum Starten von TUI in                                          |
+| <nobr><code>{"--continue"}</code></nobr> | `-c` | Letzte Sitzung fortsetzen                                                          |
+| <nobr><code>{"--session"}</code></nobr>  | `-s` | Session-ID zum Fortfahren                                                          |
+| <nobr><code>{"--fork"}</code></nobr>     |      | Sitzung beim Fortsetzen abzweigen (mit `--continue` oder `--session` verwenden)    |
+| <nobr><code>{"--password"}</code></nobr> | `-p` | Basic-Auth-Passwort (standardmäßig `POLTTER_SERVER_PASSWORD`)                     |
+| <nobr><code>{"--username"}</code></nobr> | `-u` | Basic-Auth-Benutzername (standardmäßig `POLTTER_SERVER_USERNAME` oder `poltter`) |
+
+---
+
+#### create
+
+Erstellen Sie einen neuen Agenten mit benutzerdefinierter Konfiguration.
+
+```bash
+poltter agent create
+```
+
+Dieser Befehl führt Sie durch die Erstellung eines neuen Agenten mit einer benutzerdefinierten Systemeingabeaufforderung und Toolkonfiguration.
+
+---
+
+#### list
+
+Listen Sie alle verfügbaren Agenten auf.
+
+```bash
+poltter agent list
+```
+
+---
+
+### auth
+
+Befehl zum Verwalten von Anmeldeinformationen und Anmelden für Anbieter.
+
+```bash
+poltter auth [command]
+```
+
+---
+
+#### login
+
+Poltter wird von der Anbieterliste bei [Models.dev](https://models.dev) unterstützt, sodass Sie `poltter auth login` verwenden können, um API-Schlüssel für jeden Anbieter zu konfigurieren, den Sie verwenden möchten. Dies wird in `~/.local/share/poltter/auth.json` gespeichert.
+
+```bash
+poltter auth login
+```
+
+Wenn Poltter startet, lädt es den Anbieter aus der Anmeldeinformationsdatei. Und ob in Ihren Umgebungen Schlüssel sind oder in Ihrem Projekt eine `.env`-Datei vorhanden ist.
+
+---
+
+#### list
+
+Listet alle authentifizierten Anbieter auf, wie in der Anmeldeinformationsdatei gespeichert.
+
+```bash
+poltter auth list
+```
+
+Oder die Kurzversion.
+
+```bash
+poltter auth ls
+```
+
+---
+
+#### logout
+
+Melden Sie sich von einem Anbieter ab, indem Sie ihn aus der Anmeldeinformationsdatei löschen.
+
+```bash
+poltter auth logout
+```
+
+---
+
+### github
+
+Verwalten Sie den GitHub-Agenten für die Repository-Automatisierung.
+
+```bash
+poltter github [command]
+```
+
+---
+
+#### install
+
+Installieren Sie den GitHub-Agenten in Ihrem Repository.
+
+```bash
+poltter github install
+```
+
+Dadurch wird der erforderliche GitHub-Aktionsworkflow eingerichtet und Sie durch den Konfigurationsprozess geführt. [Learn more](/docs/github).
+
+---
+
+#### run
+
+Führen Sie den GitHub-Agenten aus. Dies wird normalerweise in GitHub-Aktionen verwendet.
+
+```bash
+poltter github run
+```
+
+##### Optionen
+
+| Flag                                  | Beschreibung                                        |
+| ------------------------------------- | --------------------------------------------------- |
+| <nobr><code>{"--event"}</code></nobr> | GitHub Scheinereignis zum Ausführen des Agenten für |
+| <nobr><code>{"--token"}</code></nobr> | GitHub persönliches Zugriffstoken                   |
+
+---
+
+### mcp
+
+Verwalten Sie Model Context Protocol-Server.
+
+```bash
+poltter mcp [command]
+```
+
+---
+
+#### add
+
+Fügen Sie Ihrer Konfiguration einen MCP-Server hinzu.
+
+```bash
+poltter mcp add
+```
+
+Dieser Befehl führt Sie durch das Hinzufügen eines lokalen oder Remote-MCP-Servers.
+
+---
+
+#### list
+
+Listen Sie alle konfigurierten MCP-Server und deren Verbindungsstatus auf.
+
+```bash
+poltter mcp list
+```
+
+Oder nutzen Sie die Kurzversion.
+
+```bash
+poltter mcp ls
+```
+
+---
+
+#### auth
+
+Authentifizieren Sie sich mit einem OAuth-fähigen MCP-Server.
+
+```bash
+poltter mcp auth [name]
+```
+
+Wenn Sie keinen Servernamen angeben, werden Sie aufgefordert, einen der verfügbaren OAuth-fähigen Server auszuwählen.
+
+Sie können auch OAuth-fähige Server und deren Authentifizierungsstatus auflisten.
+
+```bash
+poltter mcp auth list
+```
+
+Oder nutzen Sie die Kurzversion.
+
+```bash
+poltter mcp auth ls
+```
+
+---
+
+#### logout
+
+Entfernen Sie OAuth-Anmeldeinformationen für einen MCP-Server.
+
+```bash
+poltter mcp logout [name]
+```
+
+---
+
+#### debug
+
+Beheben Sie OAuth-Verbindungsprobleme für einen MCP-Server.
+
+```bash
+poltter mcp debug <name>
+```
+
+---
+
+### models
+
+Listen Sie alle verfügbaren Modelle der konfigurierten Anbieter auf.
+
+```bash
+poltter models [provider]
+```
+
+Dieser Befehl zeigt alle bei Ihren konfigurierten Anbietern verfügbaren Modelle im Format `provider/model` an.
+
+Dies ist nützlich, um die genauen Modellnamen herauszufinden, die in [Ihrer Konfiguration](/docs/config/) verwendet werden sollen.
+
+Sie können optional eine Anbieter-ID übergeben, um Modelle nach diesem Anbieter zu filtern.
+
+```bash
+poltter models anthropic
+```
+
+#### Optionen
+
+| Flag                                    | Beschreibung                                                                          |
+| --------------------------------------- | ------------------------------------------------------------------------------------- |
+| <nobr><code>{"--refresh"}</code></nobr> | Aktualisieren Sie den Modellcache von models.dev                                      |
+| <nobr><code>{"--verbose"}</code></nobr> | Verwenden Sie eine ausführlichere Modellausgabe (einschließlich Metadaten wie Kosten) |
+
+Verwenden Sie das Flag `--refresh`, um die zwischengespeicherte Modellliste zu aktualisieren. Dies ist nützlich, wenn einem Anbieter neue Modelle hinzugefügt wurden und Sie diese in Poltter sehen möchten.
+
+```bash
+poltter models --refresh
+```
+
+---
+
+### run
+
+Führen Sie Poltter im nicht interaktiven Modus aus, indem Sie direkt eine Eingabeaufforderung übergeben.
+
+```bash
+poltter run [message..]
+```
+
+Dies ist nützlich für die Skripterstellung, die Automatisierung oder wenn Sie eine schnelle Antwort wünschen, ohne das vollständige TUI zu starten. Zum Beispiel:
+
+```bash "poltter run"
+poltter run Explain the use of context in Go
+```
+
+Sie können auch eine Verbindung zu einer laufenden `poltter serve`-Instanz herstellen, um bei jedem Lauf Kaltstartzeiten für den MCP-Server zu vermeiden:
+
+```bash
+# Start a headless server in one terminal
+poltter serve
+
+# In another terminal, run commands that attach to it
+poltter run --attach http://localhost:4096 "Explain async/await in JavaScript"
+```
+
+#### Optionen
+
+| Flag                                     | Kurz | Beschreibung                                                                                        |
+| ---------------------------------------- | ---- | --------------------------------------------------------------------------------------------------- |
+| <nobr><code>{"--command"}</code></nobr>  |      | Der auszuführende Befehl, Argumente als Nachricht verwenden                                         |
+| <nobr><code>{"--continue"}</code></nobr> | `-c` | Setzen Sie die letzte Sitzung fort                                                                  |
+| <nobr><code>{"--session"}</code></nobr>  | `-s` | Session-ID zum Fortfahren                                                                           |
+| <nobr><code>{"--fork"}</code></nobr>     |      | Sitzung beim Fortsetzen verzweigen (mit `--continue` oder `--session` verwenden)                    |
+| <nobr><code>{"--share"}</code></nobr>    |      | Teilen Sie die Sitzung                                                                              |
+| <nobr><code>{"--model"}</code></nobr>    | `-m` | Zu verwendendes Modell in der Form provider/model                                                   |
+| <nobr><code>{"--agent"}</code></nobr>    |      | Zu verwendender Agent                                                                               |
+| <nobr><code>{"--file"}</code></nobr>     | `-f` | Datei(en) zum Anhängen an die Nachricht                                                             |
+| <nobr><code>{"--format"}</code></nobr>   |      | Format: default (formatiert) oder json (rohe JSON-Ereignisse)                                       |
+| <nobr><code>{"--title"}</code></nobr>    |      | Titel für die Sitzung (verwendet eine verkürzte Eingabeaufforderung, wenn kein Wert angegeben wird) |
+| <nobr><code>{"--attach"}</code></nobr>   |      | An einen laufenden Poltter-Server anschließen (z.B. http://localhost:4096)                         |
+| <nobr><code>{"--password"}</code></nobr> | `-p` | Basic-Auth-Passwort (standardmäßig `POLTTER_SERVER_PASSWORD`)                                      |
+| <nobr><code>{"--username"}</code></nobr> | `-u` | Basic-Auth-Benutzername (standardmäßig `POLTTER_SERVER_USERNAME` oder `poltter`)                  |
+| <nobr><code>{"--dir"}</code></nobr>      |      | Verzeichnis für die Ausführung, oder Pfad auf dem Remote-Server beim Anhängen                       |
+| <nobr><code>{"--variant"}</code></nobr>  |      | Modellvariante (anbieterspezifischer Reasoning-Aufwand)                                             |
+| <nobr><code>{"--thinking"}</code></nobr> |      | Denkblöcke anzeigen                                                                                 |
+| <nobr><code>{"--port"}</code></nobr>     |      | Port für den lokalen Server (standardmäßig zufälliger Port)                                         |
+
+---
+
+### serve
+
+Starten Sie einen Headless-Poltter-Server für den API-Zugriff. Sehen Sie sich die [Server-Dokumentation](/docs/server) für die vollständige HTTP-Schnittstelle an.
+
+```bash
+poltter serve
+```
+
+Dadurch wird ein HTTP-Server gestartet, der API-Zugriff auf Poltter-Funktionalität ohne die TUI-Schnittstelle bietet. Legen Sie `POLTTER_SERVER_PASSWORD` fest, um die HTTP-Basisauthentifizierung zu aktivieren (Benutzername ist standardmäßig `poltter`).
+
+#### Optionen
+
+| Flag                                     | Beschreibung                                    |
+| ---------------------------------------- | ----------------------------------------------- |
+| <nobr><code>{"--port"}</code></nobr>     | Port zum Abhören                                |
+| <nobr><code>{"--hostname"}</code></nobr> | Hostname zum Abhören                            |
+| <nobr><code>{"--mdns"}</code></nobr>     | mDNS-Discovery aktivieren                       |
+| <nobr><code>{"--cors"}</code></nobr>     | Zusätzliche Browser-Ursprünge für CORS zulassen |
+
+---
+
+### session
+
+Poltter-Sitzungen verwalten.
+
+```bash
+poltter session [command]
+```
+
+---
+
+#### list
+
+Listen Sie alle Poltter-Sitzungen auf.
+
+```bash
+poltter session list
+```
+
+##### Optionen
+
+| Flag                                      | Kurz | Beschreibung                             |
+| ----------------------------------------- | ---- | ---------------------------------------- |
+| <nobr><code>{"--max-count"}</code></nobr> | `-n` | Beschränken auf die N neuesten Sitzungen |
+| <nobr><code>{"--format"}</code></nobr>    |      | Ausgabeformat: table oder json (table)   |
+
+---
+
+### stats
+
+Zeigen Sie Token-Nutzungs- und Kostenstatistiken für Ihre Poltter-Sitzungen an.
+
+```bash
+poltter stats
+```
+
+#### Optionen
+
+| Flag                                    | Beschreibung                                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| <nobr><code>{"--days"}</code></nobr>    | Statistiken für die letzten N Tage anzeigen (alle Zeiten)                                                                      |
+| <nobr><code>{"--tools"}</code></nobr>   | Anzahl der angebotenen Werkzeuge (alle)                                                                                        |
+| <nobr><code>{"--models"}</code></nobr>  | Aufschlüsselung der Modellnutzung anzeigen (standardmäßig ausgeblendet). Übergeben Sie eine Zahl, um die obersten N anzuzeigen |
+| <nobr><code>{"--project"}</code></nobr> | Nach Projekt filtern (alle Projekte, leere Zeichenfolge: aktuelles Projekt)                                                    |
+
+---
+
+### export
+
+Sitzungsdaten als JSON exportieren.
+
+```bash
+poltter export [sessionID]
+```
+
+Wenn Sie keine Sitzungs-ID angeben, werden Sie aufgefordert, eine der verfügbaren Sitzungen auszuwählen.
+
+---
+
+### import
+
+Importieren Sie Sitzungsdaten aus einer JSON-Datei oder einer Poltter-Freigabe-URL.
+
+```bash
+poltter import <file>
+```
+
+Sie können aus einer lokalen Datei oder einer Poltter-Freigabe-URL importieren.
+
+```bash
+poltter import session.json
+poltter import https://opncd.ai/s/abc123
+```
+
+---
+
+### web
+
+Starten Sie einen Headless-Poltter-Server mit einer Weboberfläche.
+
+```bash
+poltter web
+```
+
+Dadurch wird ein HTTP-Server gestartet und ein Webbrowser geöffnet, um über eine Webschnittstelle auf Poltter zuzugreifen. Legen Sie `POLTTER_SERVER_PASSWORD` fest, um die HTTP-Basisauthentifizierung zu aktivieren (Benutzername ist standardmäßig `poltter`).
+
+#### Optionen
+
+| Flag                                     | Beschreibung                                    |
+| ---------------------------------------- | ----------------------------------------------- |
+| <nobr><code>{"--port"}</code></nobr>     | Port zum Abhören                                |
+| <nobr><code>{"--hostname"}</code></nobr> | Hostname zum Abhören                            |
+| <nobr><code>{"--mdns"}</code></nobr>     | mDNS-Discovery aktivieren                       |
+| <nobr><code>{"--cors"}</code></nobr>     | Zusätzliche Browser-Ursprünge für CORS zulassen |
+
+---
+
+### acp
+
+Starten Sie einen ACP (Agent Client Protocol) Server.
+
+```bash
+poltter acp
+```
+
+Dieser Befehl startet einen ACP-Server, der über stdin/stdout unter Verwendung von nd-JSON kommuniziert.
+
+#### Optionen
+
+| Flag                                     | Beschreibung         |
+| ---------------------------------------- | -------------------- |
+| <nobr><code>{"--cwd"}</code></nobr>      | Arbeitsverzeichnis   |
+| <nobr><code>{"--port"}</code></nobr>     | Port zum Abhören     |
+| <nobr><code>{"--hostname"}</code></nobr> | Hostname zum Abhören |
+
+---
+
+### uninstall
+
+Deinstallieren Sie Poltter und entfernen Sie alle zugehörigen Dateien.
+
+```bash
+poltter uninstall
+```
+
+#### Optionen
+
+| Flag                                        | Kurz | Beschreibung                                        |
+| ------------------------------------------- | ---- | --------------------------------------------------- |
+| <nobr><code>{"--keep-config"}</code></nobr> | `-c` | Konfigurationsdateien behalten                      |
+| <nobr><code>{"--keep-data"}</code></nobr>   | `-d` | Sitzungsdaten und Snapshots aufbewahren             |
+| <nobr><code>{"--dry-run"}</code></nobr>     |      | Zeigt, was entfernt werden würde, ohne zu entfernen |
+| <nobr><code>{"--force"}</code></nobr>       | `-f` | Bestätigungsaufforderungen überspringen             |
+
+---
+
+### upgrade
+
+Aktualisiert Poltter auf die neueste Version oder eine bestimmte Version.
+
+```bash
+poltter upgrade [target]
+```
+
+Um auf die neueste Version zu aktualisieren:
+
+```bash
+poltter upgrade
+```
+
+Um auf eine bestimmte Version zu aktualisieren.
+
+```bash
+poltter upgrade v0.1.48
+```
+
+#### Optionen
+
+| Flag                                   | Kurz | Beschreibung                                                        |
+| -------------------------------------- | ---- | ------------------------------------------------------------------- |
+| <nobr><code>{"--method"}</code></nobr> | `-m` | Die zu verwendende Installationsmethode; curl, npm, pnpm, bun, brew |
+
+---
+
+## Globale Flags
+
+Der Poltter CLI akzeptiert die folgenden globalen Flags.
+
+| Flag                                       | Kurz | Beschreibung                              |
+| ------------------------------------------ | ---- | ----------------------------------------- |
+| <nobr><code>{"--help"}</code></nobr>       | `-h` | Hilfe anzeigen                            |
+| <nobr><code>{"--version"}</code></nobr>    | `-v` | Versionsnummer drucken                    |
+| <nobr><code>{"--print-logs"}</code></nobr> |      | Protokolle nach stderr drucken            |
+| <nobr><code>{"--log-level"}</code></nobr>  |      | Protokollebene (DEBUG, INFO, WARN, ERROR) |
+
+---
+
+## Umgebungsvariablen
+
+Poltter kann mithilfe von Umgebungsvariablen konfiguriert werden.
+
+| Variable                              | Typ             | Beschreibung                                                                     |
+| ------------------------------------- | --------------- | -------------------------------------------------------------------------------- |
+| `POLTTER_AUTO_SHARE`                 | boolescher Wert | Sitzungen automatisch teilen                                                     |
+| `POLTTER_GIT_BASH_PATH`              | Zeichenfolge    | Pfad zur ausführbaren Git Bash-Datei unter Windows                               |
+| `POLTTER_CONFIG`                     | Zeichenfolge    | Pfad zur Konfigurationsdatei                                                     |
+| `POLTTER_CONFIG_DIR`                 | Zeichenfolge    | Pfad zum Konfigurationsverzeichnis                                               |
+| `POLTTER_CONFIG_CONTENT`             | Zeichenfolge    | Inline-JSON-Konfigurationsinhalt                                                 |
+| `POLTTER_DISABLE_AUTOUPDATE`         | boolescher Wert | Automatische Update-Prüfungen deaktivieren                                       |
+| `POLTTER_DISABLE_PRUNE`              | boolescher Wert | Bereinigung alter Daten deaktivieren                                             |
+| `POLTTER_DISABLE_TERMINAL_TITLE`     | boolescher Wert | Deaktivieren Sie die automatische Aktualisierung von Terminaltiteln              |
+| `POLTTER_PERMISSION`                 | Zeichenfolge    | Inline-JSON-Berechtigungskonfiguration                                           |
+| `POLTTER_DISABLE_DEFAULT_PLUGINS`    | boolescher Wert | Standard-Plugins deaktivieren                                                    |
+| `POLTTER_DISABLE_LSP_DOWNLOAD`       | boolescher Wert | Automatische LSP-Server-Downloads deaktivieren                                   |
+| `POLTTER_ENABLE_EXPERIMENTAL_MODELS` | boolescher Wert | Experimentelle Modelle aktivieren                                                |
+| `POLTTER_DISABLE_AUTOCOMPACT`        | boolescher Wert | Automatische Kontextkomprimierung deaktivieren                                   |
+| `POLTTER_DISABLE_CLAUDE_CODE`        | boolescher Wert | Deaktivieren Sie das Lesen von `.claude` (Prompt + Skills)                       |
+| `POLTTER_DISABLE_CLAUDE_CODE_PROMPT` | boolescher Wert | Deaktivieren Sie das Lesen von `~/.claude/CLAUDE.md`                             |
+| `POLTTER_DISABLE_CLAUDE_CODE_SKILLS` | boolescher Wert | Deaktivieren Sie das Laden von `.claude/skills`                                  |
+| `POLTTER_DISABLE_MODELS_FETCH`       | boolescher Wert | Deaktivieren Sie das Abrufen von Modellen aus Remote-Quellen                     |
+| `POLTTER_FAKE_VCS`                   | Zeichenfolge    | Gefälschter VCS-Anbieter zu Testzwecken                                          |
+| `POLTTER_CLIENT`                     | Zeichenfolge    | Client-ID (standardmäßig `cli`)                                                  |
+| `POLTTER_ENABLE_EXA`                 | boolescher Wert | Exa-Websuchtools aktivieren                                                      |
+| `POLTTER_SERVER_PASSWORD`            | Zeichenfolge    | Aktivieren Sie die Basisauthentifizierung für `serve`/`web`                      |
+| `POLTTER_SERVER_USERNAME`            | Zeichenfolge    | Benutzernamen für die Basisauthentifizierung überschreiben (Standard `poltter`) |
+| `POLTTER_MODELS_URL`                 | Zeichenfolge    | Benutzerdefinierte URL zum Abrufen der Modellkonfiguration                       |
+
+---
+
+### Experimentell
+
+Diese Umgebungsvariablen ermöglichen experimentelle Funktionen, die sich ändern oder entfernt werden können.
+
+| Variable                                        | Typ             | Beschreibung                                              |
+| ----------------------------------------------- | --------------- | --------------------------------------------------------- |
+| `POLTTER_EXPERIMENTAL`                         | boolescher Wert | Experimentelle Funktionen unter dem Sammelflag aktivieren |
+| `POLTTER_EXPERIMENTAL_ICON_DISCOVERY`          | boolescher Wert | Symbolerkennung aktivieren                                |
+| `POLTTER_EXPERIMENTAL_DISABLE_COPY_ON_SELECT`  | boolescher Wert | Kopieren bei Auswahl in TUI deaktivieren                  |
+| `POLTTER_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS` | Zahl            | Standard-Timeout für Bash-Befehle in ms                   |
+| `POLTTER_EXPERIMENTAL_OUTPUT_TOKEN_MAX`        | Zahl            | Maximale Ausgabetokens für LLM-Antworten                  |
+| `POLTTER_EXPERIMENTAL_FILEWATCHER`             | boolescher Wert | Dateiüberwachung für das gesamte Verzeichnis aktivieren   |
+| `POLTTER_EXPERIMENTAL_OXFMT`                   | boolescher Wert | Oxfmt-Formatierer aktivieren                              |
+| `POLTTER_EXPERIMENTAL_LSP_TOOL`                | boolescher Wert | Experimentelles LSP-Tool aktivieren                       |
+| `POLTTER_EXPERIMENTAL_DISABLE_FILEWATCHER`     | boolescher Wert | Dateiüberwachung deaktivieren                             |
+| `POLTTER_EXPERIMENTAL_EXA`                     | boolescher Wert | Experimentelle Exa-Funktionen aktivieren                  |
+| `POLTTER_EXPERIMENTAL_LSP_TY`                  | boolescher Wert | TY LSP für Python-Dateien aktivieren                      |
+| `POLTTER_EXPERIMENTAL_PLAN_MODE`               | boolescher Wert | Planmodus aktivieren                                      |
+| `POLTTER_EXPERIMENTAL_BACKGROUND_SUBAGENTS`    | boolescher Wert | Hintergrundaufgaben für Subagenten aktivieren             |
+| `POLTTER_EXPERIMENTAL_EVENT_SYSTEM`            | boolescher Wert | Experimentelles Ereignissystem aktivieren                 |
+| `POLTTER_EXPERIMENTAL_NATIVE_LLM`              | boolescher Wert | Nativen LLM-Anfragepfad aktivieren                        |
+| `POLTTER_EXPERIMENTAL_PARALLEL`                | boolescher Wert | Parallele Websuche aktivieren                             |
+| `POLTTER_EXPERIMENTAL_SCOUT`                   | boolescher Wert | Scout-Subagent aktivieren                                 |
+| `POLTTER_EXPERIMENTAL_WORKSPACES`              | boolescher Wert | Workspace-Unterstützung aktivieren                        |
