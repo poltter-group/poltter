@@ -17,7 +17,6 @@
   <a href="README.md">English</a> |
 </p>
 
-[![Poltter Terminal UI](packages/web/src/assets/lander/screenshot.png)](https://github.com/poltter-group/poltter)
 
 ---
 
