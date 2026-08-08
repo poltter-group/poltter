@@ -11,7 +11,7 @@ const rootDir = path.resolve(packageDir, "../..")
 const signScript = path.join(rootDir, "script", "sign-windows.ps1")
 // The Electron 42 packaging update briefly installed Linux launchers/icons under
 // "poltter-desktop". Keep that hidden desktop entry around so existing GNOME/KDE
-// pins still resolve after the canonical app id changes back to ai.opencode.desktop.
+// pins still resolve after the canonical app id changes back to ai.poltter.desktop.
 const legacyDesktopEntry = path.join(packageDir, "resources", "linux", "poltter-desktop.desktop")
 const legacyDesktopEntryFpm = `${legacyDesktopEntry}=/usr/share/applications/poltter-desktop.desktop`
 
@@ -36,9 +36,9 @@ const channel = (() => {
 })()
 
 const APP_IDS = {
-  dev: "ai.opencode.desktop.dev",
-  beta: "ai.opencode.desktop.beta",
-  prod: "ai.opencode.desktop",
+  dev: "ai.poltter.desktop.dev",
+  beta: "ai.poltter.desktop.beta",
+  prod: "ai.poltter.desktop",
 } as const
 
 const getBase = (appId: string): Configuration => ({
@@ -48,8 +48,8 @@ const getBase = (appId: string): Configuration => ({
     buildResources: "resources",
   },
   // Linux launchers are .desktop files, so this is the desktop file name,
-  // not just the app id. For prod, app id "ai.opencode.desktop" becomes
-  // "ai.opencode.desktop.desktop".
+  // not just the app id. For prod, app id "ai.poltter.desktop" becomes
+  // "ai.poltter.desktop.desktop".
   // https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html
   // https://www.electron.build/docs/linux/
   extraMetadata: {
@@ -138,7 +138,7 @@ function getConfig() {
         appId,
         productName: "Poltter Beta",
         protocols: { name: "Poltter Beta", schemes: ["poltter"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "poltter-beta", channel: "latest" },
+        publish: { provider: "github", owner: "poltter-group", repo: "poltter-beta", channel: "latest" },
         deb: { fpm: [metainfoFpm(appId)] },
         rpm: { packageName: "poltter-beta", fpm: [metainfoFpm(appId)] },
       }
@@ -149,7 +149,7 @@ function getConfig() {
         appId,
         productName: "Poltter",
         protocols: { name: "Poltter", schemes: ["poltter"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "poltter", channel: "latest" },
+        publish: { provider: "github", owner: "poltter-group", repo: "poltter", channel: "latest" },
         deb: { fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },
         rpm: { packageName: "poltter", fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },
       }

@@ -141,7 +141,7 @@ export const dict = {
   "provider.connect.poltterZen.line2":
     "Med én enkelt API-nøkkel får du tilgang til modeller som Claude, GPT, Gemini, GLM og flere.",
   "provider.connect.poltterZen.visit.prefix": "Besøk ",
-  "provider.connect.poltterZen.visit.link": "opencode.ai/zen",
+  "provider.connect.poltterZen.visit.link": "poltter.ai/zen",
   "provider.connect.poltterZen.visit.suffix": " for å hente API-nøkkelen din.",
   "provider.connect.oauth.code.visit.prefix": "Besøk ",
   "provider.connect.oauth.code.visit.link": "denne lenken",

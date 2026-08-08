@@ -130,7 +130,7 @@ export const dict = {
   "provider.connect.poltterZen.line2":
     "Com uma única chave de API você terá acesso a modelos como Claude, GPT, Gemini, GLM e mais.",
   "provider.connect.poltterZen.visit.prefix": "Visite ",
-  "provider.connect.poltterZen.visit.link": "opencode.ai/zen",
+  "provider.connect.poltterZen.visit.link": "poltter.ai/zen",
   "provider.connect.poltterZen.visit.suffix": " para obter sua chave de API.",
   "provider.connect.oauth.code.visit.prefix": "Visite ",
   "provider.connect.oauth.code.visit.link": "este link",

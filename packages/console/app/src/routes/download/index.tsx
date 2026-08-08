@@ -120,10 +120,10 @@ export default function Download() {
             <div data-component="section-content">
               <button
                 data-component="cli-row"
-                onClick={handleCopyClick("curl -fsSL https://opencode.ai/install | bash")}
+                onClick={handleCopyClick("curl -fsSL https://poltter.ai/install | bash")}
               >
                 <code>
-                  curl -fsSL https://<strong>opencode.ai/install</strong> | bash
+                  curl -fsSL https://<strong>poltter.ai/install</strong> | bash
                 </code>
                 <CopyStatus />
               </button>
@@ -139,9 +139,9 @@ export default function Download() {
                 </code>
                 <CopyStatus />
               </button>
-              <button data-component="cli-row" onClick={handleCopyClick("brew install anomalyco/tap/poltter")}>
+              <button data-component="cli-row" onClick={handleCopyClick("brew install poltter-group/tap/poltter")}>
                 <code>
-                  brew install <strong>anomalyco/tap/poltter</strong>
+                  brew install <strong>poltter-group/tap/poltter</strong>
                 </code>
                 <CopyStatus />
               </button>

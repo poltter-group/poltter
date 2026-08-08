@@ -200,19 +200,19 @@ export const DESKTOP_MENU: DesktopMenu[] = [
     id: "help",
     label: "Help",
     items: [
-      { type: "item", label: "Poltter Documentation", href: "https://opencode.ai/docs" },
+      { type: "item", label: "Poltter Documentation", href: "https://poltter.ai/docs" },
       { type: "item", label: "Support Forum", href: "https://discord.com/invite/poltter" },
       { type: "item", label: "Export Logs...", command: "logs.export" },
       { type: "separator" },
       {
         type: "item",
         label: "Share Feedback",
-        href: "https://github.com/anomalyco/opencode/issues/new?template=feature_request.yml",
+        href: "https://github.com/poltter-group/poltter/issues/new?template=feature_request.yml",
       },
       {
         type: "item",
         label: "Report a Bug",
-        href: "https://github.com/anomalyco/opencode/issues/new?template=bug_report.yml",
+        href: "https://github.com/poltter-group/poltter/issues/new?template=bug_report.yml",
       },
     ],
   },

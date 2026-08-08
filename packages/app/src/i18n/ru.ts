@@ -142,7 +142,7 @@ export const dict = {
   "provider.connect.poltterZen.line2":
     "С одним API ключом вы получите доступ к таким моделям как Claude, GPT, Gemini, GLM и другим.",
   "provider.connect.poltterZen.visit.prefix": "Посетите ",
-  "provider.connect.poltterZen.visit.link": "opencode.ai/zen",
+  "provider.connect.poltterZen.visit.link": "poltter.ai/zen",
   "provider.connect.poltterZen.visit.suffix": " чтобы получить ваш API ключ.",
   "provider.connect.oauth.code.visit.prefix": "Посетите ",
   "provider.connect.oauth.code.visit.link": "эту ссылку",

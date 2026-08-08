@@ -129,7 +129,7 @@ export const dict = {
     "Poltter Zenは、コーディングエージェント向けに最適化された信頼性の高いモデルへのアクセスを提供します。",
   "provider.connect.poltterZen.line2": "1つのAPIキーで、Claude、GPT、Gemini、GLMなどのモデルにアクセスできます。",
   "provider.connect.poltterZen.visit.prefix": " ",
-  "provider.connect.poltterZen.visit.link": "opencode.ai/zen",
+  "provider.connect.poltterZen.visit.link": "poltter.ai/zen",
   "provider.connect.poltterZen.visit.suffix": " にアクセスしてAPIキーを取得してください。",
   "provider.connect.oauth.code.visit.prefix": " ",
   "provider.connect.oauth.code.visit.link": "このリンク",

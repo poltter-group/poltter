@@ -166,7 +166,7 @@ export const dict = {
   "provider.connect.poltterZen.line1": "Poltter Zen 为你提供一组精选的可靠优化模型，用于代码智能体。",
   "provider.connect.poltterZen.line2": "只需一个 API 密钥，你就能使用 Claude、GPT、Gemini、GLM 等模型。",
   "provider.connect.poltterZen.visit.prefix": "访问 ",
-  "provider.connect.poltterZen.visit.link": "opencode.ai/zen",
+  "provider.connect.poltterZen.visit.link": "poltter.ai/zen",
   "provider.connect.poltterZen.visit.suffix": " 获取你的 API 密钥。",
   "provider.connect.oauth.code.visit.prefix": "访问 ",
   "provider.connect.oauth.code.visit.link": "此链接",

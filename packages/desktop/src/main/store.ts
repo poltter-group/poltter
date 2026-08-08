@@ -11,7 +11,7 @@ const cache = new Map<string, Store>()
 // We cannot instantiate the electron-store at module load time because
 // module import hoisting causes this to run before app.setPath("userData", ...)
 // in index.ts has executed, which would result in files being written to the default directory
-// (e.g. bad: %APPDATA%\@poltter-ai\desktop\poltter.settings vs good: %APPDATA%\ai.opencode.desktop.dev\poltter.settings).
+// (e.g. bad: %APPDATA%\@poltter-ai\desktop\poltter.settings vs good: %APPDATA%\ai.poltter.desktop.dev\poltter.settings).
 export function getStore(name = SETTINGS_STORE) {
   const cached = cache.get(name)
   if (cached) return cached

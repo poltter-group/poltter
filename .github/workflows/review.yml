@@ -32,7 +32,7 @@ jobs:
       - uses: ./.github/actions/setup-bun
 
       - name: Install poltter
-        run: curl -fsSL https://opencode.ai/install | bash
+        run: curl -fsSL https://poltter.ai/install | bash
 
       - name: Get PR details
         id: pr-details

@@ -4,6 +4,9 @@
   "version": "1.18.11",
   "type": "module",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "bun test",
     "typecheck": "tsgo --noEmit",
@@ -20,7 +23,7 @@
     "./v2/types": "./src/v2/gen/types.gen.ts"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "devDependencies": {
     "@hey-api/openapi-ts": "0.90.10",

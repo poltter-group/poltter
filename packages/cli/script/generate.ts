@@ -1,4 +1,4 @@
-const modelsUrl = process.env.POLTTER_MODELS_URL || "https://models.opencode.ai"
+const modelsUrl = process.env.POLTTER_MODELS_URL || "https://models.poltter.ai"
 
 export const modelsData = process.env.MODELS_DEV_API_JSON
   ? await Bun.file(process.env.MODELS_DEV_API_JSON).text()

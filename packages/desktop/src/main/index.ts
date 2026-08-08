@@ -55,9 +55,9 @@ const APP_NAMES: Record<string, string> = {
   prod: "Poltter",
 }
 const APP_IDS: Record<string, string> = {
-  dev: "ai.opencode.desktop.dev",
-  beta: "ai.opencode.desktop.beta",
-  prod: "ai.opencode.desktop",
+  dev: "ai.poltter.desktop.dev",
+  beta: "ai.poltter.desktop.beta",
+  prod: "ai.poltter.desktop",
 }
 const TEST_ONBOARDING = process.env.POLTTER_TEST_ONBOARDING === "1"
 const SIDECAR_VERSION = process.env.POLTTER_SIDECAR_V2 === "1" ? "v2" : "v1"
@@ -126,7 +126,7 @@ const main = Effect.gen(function* () {
 
   process.env.POLTTER_DISABLE_EMBEDDED_WEB_UI = "true"
 
-  const appId = app.isPackaged ? APP_IDS[CHANNEL] : "ai.opencode.desktop.dev"
+  const appId = app.isPackaged ? APP_IDS[CHANNEL] : "ai.poltter.desktop.dev"
   const onboardingTestRoot = ((): string | undefined => {
     if (!TEST_ONBOARDING) return
 

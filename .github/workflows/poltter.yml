@@ -26,7 +26,7 @@ jobs:
       - uses: ./.github/actions/setup-bun
 
       - name: Run poltter
-        uses: anomalyco/opencode/github@2c14fc5586fe0b88e5c04732d2e846769cc35671 # latest
+        uses: poltter-group/poltter/github@2c14fc5586fe0b88e5c04732d2e846769cc35671 # latest
         env:
           POLTTER_API_KEY: ${{ secrets.POLTTER_API_KEY }}
           POLTTER_PERMISSION: '{"bash": "deny"}'

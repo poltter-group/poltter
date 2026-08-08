@@ -4,9 +4,9 @@ import type { Configuration } from "electron-builder"
 const legacyDesktopEntry = "resources/linux/poltter-desktop.desktop"
 
 const channels = [
-  { channel: "dev", appId: "ai.opencode.desktop.dev" },
-  { channel: "beta", appId: "ai.opencode.desktop.beta" },
-  { channel: "prod", appId: "ai.opencode.desktop" },
+  { channel: "dev", appId: "ai.poltter.desktop.dev" },
+  { channel: "beta", appId: "ai.poltter.desktop.beta" },
+  { channel: "prod", appId: "ai.poltter.desktop" },
 ] as const
 
 for (const channel of channels) {
@@ -51,9 +51,9 @@ test("keeps a hidden prod launcher for old Linux pins", async () => {
   ).toBe(true)
 
   const desktop = await Bun.file(legacyDesktopEntry).text()
-  expect(desktop).toContain("Exec=/opt/Poltter/ai.opencode.desktop %U")
-  expect(desktop).toContain("Icon=ai.opencode.desktop")
-  expect(desktop).toContain("StartupWMClass=ai.opencode.desktop")
+  expect(desktop).toContain("Exec=/opt/Poltter/ai.poltter.desktop %U")
+  expect(desktop).toContain("Icon=ai.poltter.desktop")
+  expect(desktop).toContain("StartupWMClass=ai.poltter.desktop")
   expect(desktop).toContain("NoDisplay=true")
 })
 
