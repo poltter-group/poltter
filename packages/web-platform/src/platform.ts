@@ -1,4 +1,4 @@
-import type { Platform, ServerConnection } from "@poltter-ai/app"
+import { ServerConnection, type Platform } from "@poltter-ai/app"
 import type { AsyncStorage } from "@solid-primitives/storage"
 import pkg from "../package.json"
 
@@ -132,37 +132,6 @@ const toggleFullscreen = async () => {
   }
 }
 
-const openDirectoryPickerDialog: Platform extends { platform: "desktop" } ? NonNullable<Platform["openDirectoryPickerDialog"]> : never = async (opts) => {
-  if ("showDirectoryPicker" in window) {
-    try {
-      const dirHandle = await (window as any).showDirectoryPicker({ mode: "readwrite" })
-      return dirHandle.name
-    } catch {
-      return null
-    }
-  }
-
-  return new Promise((resolve) => {
-    const input = document.createElement("input")
-    input.type = "file"
-    input.webkitdirectory = true
-    input.multiple = opts?.multiple ?? false
-    input.addEventListener("change", () => {
-      const files = input.files
-      if (!files || files.length === 0) {
-        resolve(null)
-        return
-      }
-      const firstFile = files[0]
-      const relativePath = firstFile.webkitRelativePath
-      const dirName = relativePath ? relativePath.split("/")[0] : firstFile.name
-      resolve(opts?.multiple ? [dirName] : dirName)
-    })
-    input.addEventListener("cancel", () => resolve(null))
-    input.click()
-  })
-}
-
 const openAttachmentPickerDialog: Platform["openAttachmentPickerDialog"] = async (opts, onFile) => {
   return new Promise<void>((resolve) => {
     const input = document.createElement("input")
@@ -255,18 +224,10 @@ const checkAppExists: Platform["checkAppExists"] = async () => false
 const setForceFocus: Platform["setForceFocus"] = async () => {}
 const recordFatalRendererError: Platform["recordFatalRendererError"] = async () => {}
 
-const os = (() => {
-  const ua = navigator.userAgent
-  if (ua.includes("Mac")) return "macos" as const
-  if (ua.includes("Windows")) return "windows" as const
-  if (ua.includes("Linux")) return "linux" as const
-  return undefined
-})()
-
 export function createWebPlatform(): Platform {
   return {
     platform: "web",
-    os,
+    os: undefined,
     version: pkg.version,
     openExternal,
     openLocalFile,
@@ -274,7 +235,6 @@ export function createWebPlatform(): Platform {
     revealPath,
     restart,
     notify,
-    openDirectoryPickerDialog,
     openAttachmentPickerDialog,
     getPathForFile,
     saveFilePickerDialog,
