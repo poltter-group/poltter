@@ -309,7 +309,7 @@ export async function POST(input: APIEvent) {
       )
       if (!workspaceID) throw new Error("Workspace ID not found")
 
-      const invoiceID = invoice.id
+      const invoiceID = invoice.id as string
       const errorMessage = invoice.attempt_count > 1 
         ? "Your subscription payment has failed. Please update your payment method."
         : "Your payment has failed. Please update your payment method."
@@ -338,7 +338,7 @@ export async function POST(input: APIEvent) {
         // Send dunning email for all failed payments
         const customer = await Billing.stripe().customers.retrieve(customerID)
         if (customer && !customer.deleted && customer.email) {
-          const isSubscription = invoice.subscription !== null
+          const isSubscription = (invoice as Stripe.Invoice & { subscription?: string | null }).subscription !== null
           const billing = await Billing.get()
           
           AWS.sendEmail({

@@ -16,7 +16,8 @@ export default function AuthCode() {
   const [loading, setLoading] = createSignal(false)
   const [resendSuccess, setResendSuccess] = createSignal(false)
 
-  const email = searchParams.email || ""
+  const emailParam = searchParams.email
+  const email = Array.isArray(emailParam) ? (emailParam[0] ?? "") : (emailParam ?? "")
 
   const handleSubmit = async (e: Event) => {
     e.preventDefault()
@@ -177,7 +178,7 @@ export default function AuthCode() {
           </A>
         </div>
 
-        <LanguagePicker align="center" />
+        <LanguagePicker />
       </div>
     </div>
   )

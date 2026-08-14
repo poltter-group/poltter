@@ -212,7 +212,7 @@ export default function BlackWorkspace() {
                 </li>
               )}
             </For>
-          </For>
+          </ul>
         </section>
       </main>
       <footer data-component="footer">

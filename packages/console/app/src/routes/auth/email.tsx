@@ -4,7 +4,6 @@ import { createSignal, Show } from "solid-js"
 import { useI18n } from "~/context/i18n"
 import { useLanguage } from "~/context/language"
 import { LanguagePicker } from "~/component/language-picker"
-import { config } from "~/lib/github"
 import "./index.css"
 
 export default function AuthEmail() {
@@ -162,7 +161,7 @@ export default function AuthEmail() {
           </div>
         </div>
 
-        <LanguagePicker align="center" />
+        <LanguagePicker />
       </div>
     </div>
   )

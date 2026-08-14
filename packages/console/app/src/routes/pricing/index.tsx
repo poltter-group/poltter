@@ -52,7 +52,33 @@ const tiers = [
   },
 ] as const
 
-const comparisonFeatures = [
+type ComparisonFeature = {
+  label:
+    | "pricing.comparison.freeModels"
+    | "pricing.comparison.goModels"
+    | "pricing.comparison.premiumModels"
+    | "pricing.comparison.byok"
+    | "pricing.comparison.autoReload"
+    | "pricing.comparison.limits"
+    | "pricing.comparison.support"
+  free?: boolean
+  go?: boolean
+  black?: boolean
+  freeText?:
+    | "pricing.comparison.autoReload.free"
+    | "pricing.comparison.limits.free"
+    | "pricing.comparison.support.free"
+  goText?:
+    | "pricing.comparison.autoReload.go"
+    | "pricing.comparison.limits.go"
+    | "pricing.comparison.support.go"
+  blackText?:
+    | "pricing.comparison.autoReload.black"
+    | "pricing.comparison.limits.black"
+    | "pricing.comparison.support.black"
+}
+
+const comparisonFeatures: ComparisonFeature[] = [
   {
     label: "pricing.comparison.freeModels",
     free: true,
