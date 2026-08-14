@@ -33,6 +33,7 @@ import { KeybindV2 } from "@poltter-ai/ui/v2/keybind-v2"
 import { TooltipV2 } from "@poltter-ai/ui/v2/tooltip-v2"
 import { reviewTooltipKeybind } from "../command-tooltip-keybind"
 import { useTitlebarRightMount } from "../titlebar"
+import { useCall } from "@/pages/session/call"
 
 const OPEN_APPS = [
   "vscode",
@@ -166,6 +167,13 @@ export function SessionHeader() {
   const status = settings.visibility.status
   const isDesktop = createMediaQuery("(min-width: 768px)")
 
+  const call = useCall()
+  const callActive = () => call.store.phase !== "idle" && call.store.phase !== "ended"
+  const toggleCall = () => {
+    if (callActive()) call.end()
+    else call.begin()
+  }
+
   const [exists, setExists] = createStore<Partial<Record<OpenApp, boolean>>>({
     finder: true,
   })
@@ -242,6 +250,10 @@ export function SessionHeader() {
     reviewVisible: isDesktop(),
     reviewOpened: view().reviewPanel.opened(),
     onReviewToggle: () => view().reviewPanel.toggle(),
+    callVisible: !!params.id,
+    callActive: callActive(),
+    callLabel: language.t(callActive() ? "call.end" : "call.start"),
+    onCallToggle: toggleCall,
   }))
 
   const selectApp = (app: OpenApp) => {
@@ -445,6 +457,19 @@ export function SessionHeader() {
                         <StatusPopover />
                       </Tooltip>
                     </Show>
+                    <Show when={!!params.id}>
+                      <Tooltip placement="bottom" value={callActive() ? language.t("call.end") : language.t("call.start")}>
+                        <Button
+                          variant="ghost"
+                          class="group/call-toggle titlebar-icon w-8 h-6 p-0 box-border shrink-0"
+                          onClick={toggleCall}
+                          aria-label={language.t(callActive() ? "call.end" : "call.start")}
+                          aria-pressed={callActive()}
+                        >
+                          <Icon size="small" name={callActive() ? "phone-active" : "phone"} />
+                        </Button>
+                      </Tooltip>
+                    </Show>
                     <TooltipKeybind
                       title={language.t("command.terminal.toggle")}
                       keybind={command.keybind("terminal.toggle")}
@@ -524,6 +549,10 @@ type SessionHeaderV2ActionsState = {
   reviewVisible: boolean
   reviewOpened: boolean
   onReviewToggle: () => void
+  callVisible: boolean
+  callActive: boolean
+  callLabel: string
+  onCallToggle: () => void
 }
 
 function SessionHeaderV2Actions(props: { state: SessionHeaderV2ActionsState }) {
@@ -560,6 +589,29 @@ function SessionHeaderV2Actions(props: { state: SessionHeaderV2ActionsState }) {
             aria-expanded={props.state.reviewOpened}
             aria-controls="review-panel"
             icon={<IconV2 name="sidebar-right" />}
+          />
+        </TooltipV2>
+      </Show>
+      <Show when={props.state.callVisible}>
+        <TooltipV2
+          class="shrink-0"
+          placement="bottom"
+          value={
+            <>
+              {props.state.callLabel}
+            </>
+          }
+        >
+          <IconButtonV2
+            type="button"
+            variant="ghost-muted"
+            size="large"
+            class="!w-9 shrink-0"
+            state={props.state.callActive ? "pressed" : undefined}
+            onClick={props.state.onCallToggle}
+            aria-label={props.state.callLabel}
+            aria-pressed={props.state.callActive}
+            icon={<IconV2 name={props.state.callActive ? "phone-active" : "phone"} />}
           />
         </TooltipV2>
       </Show>

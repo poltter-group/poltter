@@ -75,6 +75,7 @@ import { MessageTimeline } from "@/pages/session/timeline/message-timeline"
 import { createTimelineModel } from "@/pages/session/timeline/model"
 import { type DiffStyle, SessionReviewTab, type SessionReviewTabProps } from "@/pages/session/review-tab"
 import { useSessionLayout } from "@/pages/session/session-layout"
+import { CallPage, CallProvider } from "@/pages/session/call"
 import { restorePromptModel, syncPromptModel, syncSessionModel } from "@/pages/session/session-model-helpers"
 import {
   clampSessionPanelWidth,
@@ -2239,12 +2240,14 @@ export default function Page() {
         }}
       </Show>
       <Show when={!!params.id && mobileTabsBottom()}>{mobileTabs(true, true)}</Show>
+      <CallPage sessionID={params.id} />
     </>
   )
 
   return (
-    <SessionRouteFrame>
-      <SessionHeader />
+    <CallProvider sessionID={() => params.id}>
+      <SessionRouteFrame>
+        <SessionHeader />
       <div
         ref={panelRow}
         class="flex-1 min-h-0 flex flex-col md:flex-row"
@@ -2382,6 +2385,7 @@ export default function Page() {
       <Show when={!newSessionDesign()}>
         <TerminalPanel />
       </Show>
-    </SessionRouteFrame>
+      </SessionRouteFrame>
+    </CallProvider>
   )
 }
