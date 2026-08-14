@@ -144,8 +144,8 @@ export default {
           subject = response.id.sub as string
           email = response.id.email as string
         } else if (response.provider === "email") {
-          subject = response.email
-          email = response.email
+          subject = response.claims.email
+          email = response.claims.email
         } else throw new Error("Unsupported provider")
 
         if (!email) throw new Error("No email found")
